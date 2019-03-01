@@ -2,6 +2,7 @@ var exports = module.exports = {},
     utilFunctions = require('../utilFunctions'),
     constants = require('../constants'),
     placeModel = require('../../models/place'),
+    adminModel = require('../../models/admin'),
     bcrypt = require('bcrypt'),
     jwt = require('jsonwebtoken');
 
@@ -38,9 +39,38 @@ exports.getAllFeaturedPlacesLogin = async () => {
     }
 };
 
-exports.authenticatePlace = async (user) => {
+
+exports.authenticateAdmin = async (user) => {
     try {
-        let placeUser = await placeModel.find({email: user.email});
+        let admin = await placeModel.find({email: user.email});
+        if (utilFunctions.isEmpty(admin)) {
+            throw new Error(constants.responseMessages.emailNotFound)
+        }
+        let match = await bcrypt.compare(user.password, admin[0].password);
+        if (!match) {
+            throw new Error(constants.responseMessages.passwordNotMatch);
+        }
+
+        let token = jwt.sign({id: admin[0]._id}, constants.secret, {
+            expiresIn: 84600
+        });
+
+        let returningUser = admin[0].toObject();
+        delete returningUser.password;
+        delete returningUser.is_listed;
+
+
+        return {auth: true, token: token, user: returningUser}
+
+    } catch (e) {
+        console.log(e);
+        throw new Error(e);
+    }
+};
+
+exports.authenticateAdmin = async (user) => {
+    try {
+        let placeUser = await adminModel.find({email: user.email});
         if (utilFunctions.isEmpty(placeUser)) {
             throw new Error(constants.responseMessages.emailNotFound)
         }
@@ -55,8 +85,6 @@ exports.authenticatePlace = async (user) => {
 
         let returningUser = placeUser[0].toObject();
         delete returningUser.password;
-        delete returningUser.is_listed;
-
 
         return {auth: true, token: token, user: returningUser}
 

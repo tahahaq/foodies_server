@@ -127,5 +127,28 @@ router.delete("/place/:place_id", function (req, res) {
     });
 });
 
+router.post('/login', function (req, res) {
+    db_read.authenticateAdmin(req.body).then((response) => {
+        //SUCCESS
+        res.status(201).send(
+            {
+                responseCode: 201,
+                responseMessage: constants.responseMessages.Success,
+                data: {
+                    result: response
+                }
+            }
+        )
+    }).catch((error) => {
+        //ERROR
+        res.status(500).send(
+            {
+                responseCode: 500,
+                responseMessage: error.message
+            }
+        )
+    });
+});
+
 
 module.exports = router;

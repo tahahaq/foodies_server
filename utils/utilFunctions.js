@@ -1,5 +1,6 @@
 var exports = module.exports = {},
     nodeMailer = require('nodemailer'),
+    axios = require('axios'),
     constants = require('./constants'),
     placeModel = require('../models/place');
 
@@ -25,6 +26,25 @@ exports.sendPlaceApprovedEmail = async (email, name) => {
         return constants.responseMessages.Success
 
     } catch (e) {
+        console.log(e);
+        throw new Error(e);
+    }
+};
+
+exports.sendSMS = async (name , placeId , phoneNumber , isApproved) => {
+    try {
+        let approved = '';
+        if(isApproved){
+            approved = `Your place ${name} is approved on foodies.pk. Visit http:localhost:3000/places/${placeId} `
+        } else {
+            approved = `Your place ${name} is rejected on foodies.pk`
+        }
+        const a =await  axios.get(`https://sendpk.com/api/sms.php?username=923472360717&password=9347&sender=Foodies&mobile=${phoneNumber}&message=${approved}`);
+        console.log(a)
+
+        return constants.responseMessages.Success;
+    }
+    catch (e) {
         console.log(e);
         throw new Error(e);
     }

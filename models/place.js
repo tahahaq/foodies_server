@@ -6,6 +6,7 @@ placeSchema = new mongoose.Schema({
     email : String,
     name: String,
     formatted_address: String,
+    formatted_address_short: String,
     website: String,
     opening_hours: [],
     menu : [],

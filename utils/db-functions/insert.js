@@ -3,8 +3,28 @@ var exports = module.exports = {},
     constants = require('../constants'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
+    adminModel = require('../../models/admin'),
     placeModel = require('../../models/place');
 
+
+
+exports.insertAdmin = async (admin) => {
+    try {
+            let hashOfPassword = await bcrypt.hash(admin.password, constants.SALT);
+
+            await adminModel.create({
+                username : admin.username,
+                password : hashOfPassword,
+                email : admin.email,
+            });
+
+            return {auth : true  };
+    } catch (e) {
+        console.log(e);
+        throw new Error(e)
+    }
+
+};
 
 exports.insertPlace = async (place) => {
     try {

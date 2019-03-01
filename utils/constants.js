@@ -3,6 +3,8 @@ var exports = module.exports = {};
 exports.SALT = 10;
 
 exports.secret = 'MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAW4lFUCuJ6QDo5djTQtuhebj9aNq/m59hwvgWNXNz3q8PJ6vQXEOoXE7smZARn+4+7RP+olUYfIGDiji4NBLYCQIDAQAB';
+exports.SMSID = "923472360717";
+exports.SMSPASS = "9347";
 
 exports.responseMessages = {
     placeDoesntExist : 'The place doesn\'t exist',

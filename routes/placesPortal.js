@@ -5,30 +5,6 @@ let  express = require('express'),
     db_update = require('../utils/db-functions/update'),
     db_delete = require('../utils/db-functions/delete'),
     constants = require("../utils/constants");
-//
-//
-// router.post('/sms', function (req, res) {
-//     constants.(req.body.message , req.body.phone).then((response) => {
-//         //SUCCESS
-//         res.status(201).send(
-//             {
-//                 responseCode: 201,
-//                 responseMessage: constants.responseMessages.Success,
-//                 data: {
-//                     result: response
-//                 }
-//             }
-//         )
-//     }).catch((error) => {
-//         //ERROR
-//         res.status(500).send(
-//             {
-//                 responseCode: 500,
-//                 responseMessage: error.message
-//             }
-//         )
-//     });
-// });
 
 router.put('/:place_id', function (req, res) {
     db_update.updatePlaceDetails(req.params.place_id, req.body).then((response) => {
@@ -52,8 +28,6 @@ router.put('/:place_id', function (req, res) {
         )
     });
 });
-
-
 
 
 router.post('/place-login', function (req, res) {
