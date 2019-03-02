@@ -48,7 +48,6 @@ router.put('/:place_id', function (req, res) {
 
 
 router.post('/place-login', function (req, res) {
-
     db_read.authenticatePlace(req.body).then((response) => {
         //SUCCESS
         res.status(201).send(
@@ -70,7 +69,6 @@ router.post('/place-login', function (req, res) {
         )
     });
 });
-
 
 router.post('/place-register', function (req, res) {
     db_insert.insertPlace(req.body).then((response) => {

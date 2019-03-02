@@ -39,7 +39,7 @@ exports.insertPlace = async (place) => {
                 formatted_address: place.formatted_address,
                 website: place.website,
                 opening_hours : place.opening_hours,
-                menu : [],
+                menu : place.menu,
                 is_listed :false,
                 formatted_phone_number: place.formatted_phone_number,
                 description: place.description,

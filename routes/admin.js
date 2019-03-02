@@ -53,7 +53,7 @@ router.get("/place-request",function (req, res) {
 
 // APPROVE PLACE REQUEST
 
-router.put("/place-request/:place_id",verifyToken, function (req, res) {
+router.put("/place-request/:place_id",function (req, res) {
     db_update.approvePlaceRequest(req.params.place_id).then((response) => {
         //SUCCESS
         res.status(201).send(
