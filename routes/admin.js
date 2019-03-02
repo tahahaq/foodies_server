@@ -28,7 +28,7 @@ function verifyToken(req, res, next) {
 
 // GET PLACE REQUESTS
 
-router.get("/place-request", verifyToken,function (req, res) {
+router.get("/place-request",function (req, res) {
     db_read.getPlaceRequests().then((response) => {
         //SUCCESS
         res.status(201).send(
@@ -78,7 +78,7 @@ router.put("/place-request/:place_id",verifyToken, function (req, res) {
 
 
 // DELETE PLACE REQUEST
-router.delete("/place-request/:place_id", verifyToken,function (req, res) {
+router.delete("/place-request/:place_id", function (req, res) {
     db_delete.deletePlaceRequest(req.params.place_id).then((response) => {
         //SUCCESS
         res.status(201).send(
@@ -104,7 +104,7 @@ router.delete("/place-request/:place_id", verifyToken,function (req, res) {
 
 
 // DELETE PLACE
-router.delete("/place/:place_id", verifyToken, function (req, res) {
+router.delete("/place/:place_id",  function (req, res) {
     db_delete.deletePlace(req.params.place_id).then((response) => {
         //SUCCESS
         res.status(201).send(

@@ -23,7 +23,7 @@ function verifyToken(req, res, next) {
     });
 }
 
-router.put('/:place_id', verifyToken,function (req, res) {
+router.put('/:place_id', function (req, res) {
     db_update.updatePlaceDetails(req.params.place_id, req.body).then((response) => {
         //SUCCESS
         res.status(201).send(
