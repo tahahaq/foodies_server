@@ -37,6 +37,7 @@ exports.insertPlace = async (place) => {
                 email : place.email,
                 name: place.name,
                 formatted_address: place.formatted_address,
+                formatted_address_short : place.formatted_address_short,
                 website: place.website,
                 opening_hours : place.opening_hours,
                 menu : place.menu,
